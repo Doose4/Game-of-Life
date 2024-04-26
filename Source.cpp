@@ -15,16 +15,23 @@
 using namespace std;
 
 class board {
-private:
-	int myarray[9][9];
-
 public:
+	int myarray[9][9];
+	int temparray[9][9];
+
 	board() {
 		for (int i = 0; i < 9; i++)
 		{
 			for (int j = 0; j < 9; j++)
 			{
 				myarray[i][j] = 0;
+			}
+		}
+		for (int i = 0; i < 9; i++)
+		{
+			for (int j = 0; j < 9; j++)
+			{
+				temparray[i][j] = 0;
 			}
 		}
 	}
@@ -47,13 +54,38 @@ public:
 //text
 class Engine {
 private:
+	board* playboard;
+
 
 public:
+	Engine(board* boardptr) {
+		this->playboard = boardptr;
+	}
 
+	void userinput(int colum, int roww) {
+		playboard->myarray[roww][colum] = 1;
+	}
+
+	void tick() {
+		for (int i = 0; i < 9; i++)
+		{
+			for (int j = 0; j < 9; j++)
+			{
+				playboard->myarray[i][j] = 0;
+			}
+		}
+
+	}
+
+	int checkcell() {
+
+	}
 };
 
 int main() {
 	board myboard;
+	Engine gameengine(&myboard);
+
 	myboard.printboard();
 
 	return 0;
